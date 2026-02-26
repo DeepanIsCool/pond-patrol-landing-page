@@ -7,22 +7,28 @@ interface Spec {
   title: string
 }
 
+interface PricingTier {
+  name: string
+  price: string
+  description: string
+  features: string[]
+  highlighted?: boolean
+}
+
 export default function TechnicalSpecs() {
   const [isVisible, setIsVisible] = useState(false)
-  const [counts, setCounts] = useState({ coverage: 0, detection: 0, emissions: 0, rating: 0 })
+  const [counts, setCounts] = useState({ coverage: 0, detection: 0, birds: 0 })
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && counts.coverage === 0) {
-          // Start counting animation
           const interval = setInterval(() => {
             setCounts((prev) => ({
               coverage: prev.coverage < 40 ? prev.coverage + 1 : 40,
               detection: prev.detection < 360 ? prev.detection + 18 : 360,
-              emissions: 0,
-              rating: prev.rating < 67 ? prev.rating + 3.35 : 67,
+              birds: prev.birds < 99 ? prev.birds + 5 : 99,
             }))
           }, 20)
 
@@ -47,90 +53,147 @@ export default function TechnicalSpecs() {
   const specs: Spec[] = [
     { number: `${counts.coverage.toFixed(0)}k`, title: 'm² Coverage per Unit' },
     { number: '360°', title: 'Threat Detection' },
-    { number: 'Zero', title: 'Emissions' },
-    { number: 'IP67', title: 'Marine-Grade Protection' },
+    { number: 'Zero', title: 'Harmful Emissions' },
+    { number: '${counts.birds.toFixed(0)}%', title: 'Predation Prevention' },
+  ]
+
+  const pricingTiers: PricingTier[] = [
+    {
+      name: 'Starter',
+      price: '$24,999',
+      description: 'Perfect for small to medium farms up to 50 hectares.',
+      features: [
+        '1x Pond Patrol Unit',
+        '40k m² coverage area',
+        'Cloud monitoring dashboard',
+        'Email alerts & reports',
+        '1 year warranty',
+        'Email support',
+      ],
+    },
+    {
+      name: 'Professional',
+      price: '$54,999',
+      description: 'Ideal for large-scale aquaculture operations 50-200 hectares.',
+      features: [
+        '2x Pond Patrol Units',
+        '80k m² coverage area',
+        'Real-time mobile app',
+        'Advanced analytics & ML',
+        '3 year warranty',
+        '24/7 Phone support',
+        'Custom deployment',
+        'System optimization',
+      ],
+      highlighted: true,
+    },
+    {
+      name: 'Enterprise',
+      price: 'Custom',
+      description: 'Scalable solutions for mega-farms and aquaculture networks.',
+      features: [
+        '4+ Pond Patrol Units',
+        '160k+ m² coverage',
+        'Dedicated account manager',
+        'API & custom integration',
+        '5 year warranty',
+        'Premium 24/7 support',
+        'Quarterly audits',
+        'Advanced compliance',
+      ],
+    },
   ]
 
   return (
-    <section ref={sectionRef} className="relative py-24 px-6 bg-white overflow-hidden">
-      {/* Decorative blueprint background */}
-      <div className="absolute inset-0 opacity-3">
-        <svg className="w-full h-full" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="dots" width="50" height="50" patternUnits="userSpaceOnUse">
-              <circle cx="25" cy="25" r="1" fill="#0A2342" />
-            </pattern>
-          </defs>
-          <rect width="1400" height="700" fill="url(#dots)" />
-          <path d="M0 350 Q 350 200 700 350 T 1400 350" stroke="#0A2342" strokeWidth="0.5" fill="none" opacity="0.5" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section ref={sectionRef} className="py-24 px-6 bg-gradient-to-b from-[#F8F9FA] to-white">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-20">
-          <h2 className="text-5xl font-bold text-[#0A2342] mb-4 text-balance">
-            Smart Birds Meet Smarter Technology.
-          </h2>
-          <p className="text-lg text-gray-600">Engineered for Indian aquaculture conditions and global reliability standards.</p>
+        <div className="text-center mb-20">
+          <div
+            className={`transform transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          >
+            <h2 className="text-lg font-semibold text-[#D4AF37] mb-4 tracking-widest uppercase">
+              Performance Metrics
+            </h2>
+            <h3 className="text-5xl lg:text-6xl font-bold text-[#0A2342] text-balance leading-tight">
+              Built for professional aquaculture.
+            </h3>
+          </div>
         </div>
 
-        {/* Specs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Key Metrics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
           {specs.map((spec, index) => (
             <div
               key={index}
-              className={`text-center transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`text-center p-8 rounded-2xl bg-white border-2 border-[#D4AF37]/20 hover:border-[#D4AF37] transition-all duration-500 transform ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="bg-gradient-to-br from-[#D4AF37]/5 to-[#0A2342]/5 rounded-3xl p-12 border border-[#D4AF37]/20 hover:border-[#D4AF37]/40 transition-all duration-300">
-                <div className="text-6xl font-bold text-[#D4AF37] mb-4 font-mono">
-                  {spec.number}
-                </div>
-                <div className="text-[#0A2342] font-semibold text-sm uppercase tracking-widest">
-                  {spec.title}
-                </div>
-              </div>
+              <p className="text-4xl lg:text-5xl font-bold text-[#0A2342] mb-2">
+                {spec.number}
+              </p>
+              <p className="text-sm lg:text-base font-medium text-gray-600">{spec.title}</p>
             </div>
           ))}
         </div>
 
         {/* Comparison Table */}
-        <div className="mt-24">
-          <h3 className="text-3xl font-bold text-[#0A2342] mb-8 text-balance">
-            Humans Get Tired. AI Gets Results.
+        <div className="mb-24">
+          <h3 className="text-3xl font-bold text-[#0A2342] text-center mb-12">
+            Human vs. AI Protection
           </h3>
-
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-2xl border border-gray-200">
             <table className="w-full">
               <thead>
-                <tr className="border-b-2 border-[#D4AF37]/30">
-                  <th className="text-left py-6 px-6 font-semibold text-[#0A2342]">Feature</th>
-                  <th className="text-left py-6 px-6 font-semibold text-gray-600">Human Labour</th>
-                  <th className="text-left py-6 px-6 font-semibold text-[#D4AF37]">Pond Patrol AI</th>
+                <tr className="bg-[#0A2342] text-white">
+                  <th className="px-6 py-4 text-left font-semibold">Aspect</th>
+                  <th className="px-6 py-4 text-left font-semibold">Human Deterrence</th>
+                  <th className="px-6 py-4 text-left font-semibold">Pond Patrol AI</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-200">
                 {[
-                  { feature: 'Coverage Hours', human: '8-10 hours', ai: '24 hours' },
-                  { feature: 'Response Time', human: 'Minutes', ai: 'Seconds' },
-                  { feature: 'Pond Coverage', human: 'Partial', ai: 'Complete' },
-                  { feature: 'Habituation Risk', human: 'High', ai: 'Zero' },
-                  { feature: 'Weather Issues', human: 'Yes', ai: 'No' },
-                  { feature: 'Consistency', human: 'Variable', ai: 'Constant' },
-                ].map((row, index) => (
-                  <tr
-                    key={index}
-                    className={`border-b border-gray-200 hover:bg-[#F8F9FA] transition-colors ${
-                      isVisible ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    style={{ transitionDelay: `${400 + index * 50}ms` }}
-                  >
-                    <td className="py-6 px-6 font-semibold text-[#0A2342]">{row.feature}</td>
-                    <td className="py-6 px-6 text-gray-600">{row.human}</td>
-                    <td className="py-6 px-6 font-semibold text-[#D4AF37]">{row.ai}</td>
+                  {
+                    aspect: 'Coverage',
+                    human: 'Limited to visible area',
+                    ai: '360° autonomous perimeter',
+                  },
+                  {
+                    aspect: 'Response Time',
+                    human: '2-5 minutes',
+                    ai: 'Milliseconds',
+                  },
+                  {
+                    aspect: 'Cost per Year',
+                    human: '$50,000-80,000',
+                    ai: '$3,000-5,000',
+                  },
+                  {
+                    aspect: 'Consistency',
+                    human: 'Variable (fatigue)',
+                    ai: '99.9% uptime',
+                  },
+                  {
+                    aspect: 'Predictability',
+                    human: 'Highly adaptable birds',
+                    ai: 'ML-powered adaptation',
+                  },
+                  {
+                    aspect: 'Environmental',
+                    human: 'Potential harm',
+                    ai: 'Zero emissions',
+                  },
+                ].map((row, idx) => (
+                  <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4 font-semibold text-[#0A2342]">{row.aspect}</td>
+                    <td className="px-6 py-4 text-gray-600">{row.human}</td>
+                    <td className="px-6 py-4 font-semibold text-[#0A2342] bg-[#D4AF37]/5">
+                      {row.ai}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -138,80 +201,87 @@ export default function TechnicalSpecs() {
           </div>
         </div>
 
-        {/* Pricing Preview */}
-        <div className="mt-24">
-          <h3 className="text-3xl font-bold text-[#0A2342] mb-8 text-balance">
-            Scalability & Pricing Options
+        {/* Pricing Section */}
+        <div>
+          <h3 className="text-3xl font-bold text-[#0A2342] text-center mb-4">
+            Flexible Pricing Plans
           </h3>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Choose the tier that fits your farm size and budget. All plans include our industry-leading AI technology and support.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Smart Protection',
-                price: 'Custom Quote',
-                description: 'Wired power system with shore-based inverter battery.',
-                features: ['Basic Coverage', 'Shore Power', 'Manual Control'],
-                highlighted: false,
-              },
-              {
-                name: 'Standard',
-                price: '₹1,50,000',
-                description: 'Covers 200m × 200m pond (≈10 acres).',
-                features: ['Full Coverage', 'Solar Power', 'AI Auto-Response', 'Mobile App'],
-                highlighted: true,
-              },
-              {
-                name: 'Large Farms',
-                price: 'Custom Quote',
-                description: 'Dual autonomous boats with auto-charging dock.',
-                features: ['24/7 Deployment', 'Dual Units', 'Premium Support', 'Advanced Analytics'],
-                highlighted: false,
-              },
-            ].map((tier, index) => (
+            {pricingTiers.map((tier, index) => (
               <div
                 key={index}
-                className={`relative transform transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                className={`relative rounded-2xl transition-all duration-500 transform ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                } ${
+                  tier.highlighted
+                    ? 'md:scale-105 bg-gradient-to-b from-[#0A2342] to-[#0A2342]/95 text-white shadow-2xl border-2 border-[#D4AF37]'
+                    : 'bg-white border-2 border-gray-200 hover:border-[#D4AF37]/50'
                 }`}
-                style={{ transitionDelay: `${600 + index * 100}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div
-                  className={`rounded-3xl p-8 transition-all duration-300 border-2 ${
-                    tier.highlighted
-                      ? 'border-[#D4AF37] bg-gradient-to-br from-[#D4AF37]/5 to-transparent'
-                      : 'border-gray-200 bg-white hover:border-[#D4AF37]/50'
-                  }`}
-                >
-                  {tier.highlighted && (
-                    <div className="absolute -top-3 left-6 bg-[#D4AF37] text-[#0A2342] px-4 py-1 rounded-full text-sm font-bold">
+                {tier.highlighted && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="inline-block px-4 py-1 rounded-full bg-[#D4AF37] text-[#0A2342] text-sm font-bold">
                       Most Popular
-                    </div>
-                  )}
+                    </span>
+                  </div>
+                )}
 
-                  <h4 className="text-2xl font-bold text-[#0A2342] mb-2">{tier.name}</h4>
-                  <div className="text-4xl font-bold text-[#D4AF37] mb-4">{tier.price}</div>
-                  <p className="text-gray-600 text-sm mb-6">{tier.description}</p>
+                <div className="p-8 h-full flex flex-col">
+                  <h4 className={`text-2xl font-bold mb-2 ${tier.highlighted ? 'text-white' : 'text-[#0A2342]'}`}>
+                    {tier.name}
+                  </h4>
+                  <p className={`text-sm mb-6 ${tier.highlighted ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {tier.description}
+                  </p>
 
-                  <ul className="space-y-3 mb-8">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                        <svg className="w-4 h-4 text-[#D4AF37] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mb-8">
+                    <p className={`text-4xl font-bold mb-1 ${tier.highlighted ? 'text-[#D4AF37]' : 'text-[#0A2342]'}`}>
+                      {tier.price}
+                    </p>
+                    {tier.price !== 'Custom' && (
+                      <p className={`text-sm ${tier.highlighted ? 'text-gray-400' : 'text-gray-500'}`}>
+                        One-time investment
+                      </p>
+                    )}
+                  </div>
 
                   <button
-                    className={`w-full py-3 rounded-full font-semibold transition-all duration-300 ${
+                    className={`w-full py-3 rounded-full font-semibold mb-8 transition-all duration-300 ${
                       tier.highlighted
-                        ? 'bg-[#D4AF37] text-[#0A2342] hover:shadow-xl hover:scale-105'
-                        : 'border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10'
+                        ? 'bg-[#D4AF37] text-[#0A2342] hover:shadow-lg hover:scale-105'
+                        : 'border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/5'
                     }`}
                   >
-                    Get Started
+                    {tier.price === 'Custom' ? 'Contact Sales' : 'Get Started'}
                   </button>
+
+                  <div className="space-y-4 flex-grow">
+                    {tier.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <svg
+                          className={`flex-shrink-0 w-5 h-5 mt-0.5 ${
+                            tier.highlighted ? 'text-[#D4AF37]' : 'text-[#0A2342]'
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className={`text-sm ${tier.highlighted ? 'text-gray-300' : 'text-gray-700'}`}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

@@ -2,8 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+interface LinkColumn {
+  title: string
+  links: string[]
+}
+
 export default function Footer() {
   const [isVisible, setIsVisible] = useState(false)
+  const [email, setEmail] = useState('')
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -27,6 +33,31 @@ export default function Footer() {
     }
   }, [])
 
+  const linkColumns: LinkColumn[] = [
+    {
+      title: 'Product',
+      links: ['Features', 'Pricing', 'Security', 'Updates'],
+    },
+    {
+      title: 'Company',
+      links: ['About Us', 'Blog', 'Careers', 'Contact'],
+    },
+    {
+      title: 'Resources',
+      links: ['Documentation', 'API Docs', 'Support', 'Community'],
+    },
+    {
+      title: 'Legal',
+      links: ['Privacy', 'Terms of Service', 'Cookie Policy', 'Compliance'],
+    },
+  ]
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle newsletter signup
+    setEmail('')
+  }
+
   return (
     <footer ref={sectionRef} className="bg-[#0A2342] text-white">
       {/* Top Border Accent */}
@@ -35,7 +66,7 @@ export default function Footer() {
       {/* Main Footer Content */}
       <div className="px-6 py-20">
         <div className="max-w-7xl mx-auto">
-          {/* Hero CTA Section */}
+          {/* CTA Section */}
           <div className="text-center mb-20">
             <div
               className={`transform transition-all duration-700 ${
@@ -47,174 +78,106 @@ export default function Footer() {
                 <br />
                 <span className="text-[#D4AF37]">No Bird Attacks.</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Stop Feeding Birds Your Profits. Professional Bird Deterrence for Professional Farmers.
+              <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                Join leading aquaculture operators who trust Pond Patrol to protect their yield 24/7.
               </p>
-              <p className="text-sm text-gray-400 mb-10">
-                Designed for Indian Conditions. Perfect for IMC farming, Pangasius cultivation, Tilapia production, Hatchery operations, and Large reservoir systems.
-              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="px-8 py-4 rounded-full bg-[#D4AF37] text-[#0A2342] font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Start Your Free Trial
+                </button>
+                <button className="px-8 py-4 rounded-full border-2 border-[#D4AF37] text-[#D4AF37] font-bold text-lg hover:bg-[#D4AF37]/10 transition-all duration-300">
+                  Schedule Demo
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Newsletter & Contact */}
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ transitionDelay: '100ms' }}
-          >
-            {/* Newsletter */}
-            <div className="flex flex-col gap-4">
-              <label className="text-sm font-semibold uppercase tracking-widest text-[#D4AF37]">
-                Stay Updated
-              </label>
-              <div className="flex gap-2">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16 py-12 border-t border-b border-white/10">
+            {/* Newsletter Column */}
+            <div
+              className={`lg:col-span-2 transform transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+              style={{ transitionDelay: '100ms' }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_bv2xn6bv2xn6bv2x.png-LJVYX17lFZ7PyNlmO8XdZ1YaiRpD7v.jpeg"
+                  alt="Pond Patrol Logo"
+                  className="h-8 w-auto"
+                />
+              </div>
+              <p className="text-gray-400 mb-6">
+                Advanced autonomous AI-powered bird deterrence for modern aquaculture.
+              </p>
+              <form onSubmit={handleSubscribe} className="space-y-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
                 />
-                <button className="px-6 py-3 rounded-full bg-[#D4AF37] text-[#0A2342] font-semibold hover:shadow-lg transition-all">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <button className="w-full px-4 py-3 rounded-full bg-[#D4AF37] text-[#0A2342] font-semibold hover:shadow-lg transition-all duration-300">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            {/* Links Columns */}
+            {linkColumns.map((column, colIndex) => (
+              <div
+                key={colIndex}
+                className={`transform transition-all duration-700 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+                style={{ transitionDelay: `${(colIndex + 2) * 100}ms` }}
+              >
+                <h4 className="font-bold text-white mb-6">{column.title}</h4>
+                <ul className="space-y-3">
+                  {column.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <a
+                        href="#"
+                        className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-12">
+            {/* Left: Copyright */}
+            <div className="text-gray-400 text-sm">
+              <p>© 2024 Pond Patrol by Brave Ventures. All rights reserved.</p>
+            </div>
+
+            {/* Right: Social Links */}
+            <div className="flex items-center gap-6">
+              {[
+                { icon: 'LinkedIn', href: '#' },
+                { icon: 'Twitter', href: '#' },
+                { icon: 'Facebook', href: '#' },
+                { icon: 'Instagram', href: '#' },
+              ].map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.href}
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300"
+                  aria-label={social.icon}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
                   </svg>
-                </button>
-              </div>
+                </a>
+              ))}
             </div>
-
-            {/* Quick Contact */}
-            <div className="flex flex-col gap-4">
-              <label className="text-sm font-semibold uppercase tracking-widest text-[#D4AF37]">
-                Get in Touch
-              </label>
-              <div className="flex gap-4">
-                <button className="flex-1 px-6 py-3 rounded-full border-2 border-white/30 text-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all font-semibold text-sm">
-                  📞 Call Us
-                </button>
-                <button className="flex-1 px-6 py-3 rounded-full border-2 border-white/30 text-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all font-semibold text-sm">
-                  💬 WhatsApp
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Links Grid */}
-          <div
-            className={`grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 pb-12 border-b border-white/10 transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ transitionDelay: '200ms' }}
-          >
-            {/* Column 1: Product */}
-            <div>
-              <h4 className="font-semibold text-[#D4AF37] mb-4 text-sm uppercase tracking-widest">Product</h4>
-              <ul className="space-y-3 text-sm text-gray-300">
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Specifications
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Pricing
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Company */}
-            <div>
-              <h4 className="font-semibold text-[#D4AF37] mb-4 text-sm uppercase tracking-widest">Company</h4>
-              <ul className="space-y-3 text-sm text-gray-300">
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Support */}
-            <div>
-              <h4 className="font-semibold text-[#D4AF37] mb-4 text-sm uppercase tracking-widest">Support</h4>
-              <ul className="space-y-3 text-sm text-gray-300">
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4: Legal */}
-            <div>
-              <h4 className="font-semibold text-[#D4AF37] mb-4 text-sm uppercase tracking-widest">Legal</h4>
-              <ul className="space-y-3 text-sm text-gray-300">
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors">
-                    Cookies
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div
-            className={`flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#D4AF37]/60 flex items-center justify-center">
-                <span className="text-[#0A2342] font-bold text-sm">P</span>
-              </div>
-              <div>
-                <p className="font-semibold text-white">Pond Patrol by Brave Ventures</p>
-                <p className="text-xs">Protecting Aquaculture, Sustainably</p>
-              </div>
-            </div>
-
-            <p>
-              © 2026 Brave Ventures. All rights reserved. | Made with{' '}
-              <span className="text-[#D4AF37]">♦</span> for Fish Farmers.
-            </p>
           </div>
         </div>
       </div>

@@ -24,15 +24,12 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Left: Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0A2342] to-[#D4AF37] flex items-center justify-center">
-            <span className="text-white font-bold text-lg">P</span>
-          </div>
-          <span className="hidden sm:block text-sm font-semibold text-[#0A2342] tracking-tight">
-            POND PATROL
-            <br />
-            <span className="text-xs font-normal text-gray-600">by Brave Ventures</span>
-          </span>
+        <div className="flex items-center gap-2">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_bv2xn6bv2xn6bv2x.png-LJVYX17lFZ7PyNlmO8XdZ1YaiRpD7v.jpeg"
+            alt="Pond Patrol Logo"
+            className="h-10 w-auto"
+          />
         </div>
 
         {/* Center: Navigation Links */}

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -87,26 +86,12 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 flex items-center justify-center">
-              {/* Placeholder for catamaran image - blue and gold theme */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
-                {/* Simulated boat shape with SVG */}
-                <svg
-                  className="w-48 h-32 text-[#D4AF37] animate-float"
-                  viewBox="0 0 200 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Main hull */}
-                  <ellipse cx="100" cy="80" rx="60" ry="20" fill="currentColor" opacity="0.8" />
-                  {/* Sensor pod */}
-                  <circle cx="100" cy="40" r="15" fill="#C8102E" opacity="0.9" />
-                  {/* Catamaran pontoons */}
-                  <path d="M 60 85 Q 50 70 55 50" stroke="currentColor" strokeWidth="8" fill="none" opacity="0.7" />
-                  <path d="M 140 85 Q 150 70 145 50" stroke="currentColor" strokeWidth="8" fill="none" opacity="0.7" />
-                </svg>
-                <p className="text-[#D4AF37]/60 text-sm">AI-Powered Autonomous Catamaran</p>
-              </div>
+            <div className="relative w-full h-96 rounded-3xl overflow-hidden">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_aywscnaywscnayws.png-n7j7d2Qjqp3Xu4bDXIhzaSo3nXaite.jpeg"
+                alt="Pond Patrol Autonomous AI Bird Deterrence System"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
