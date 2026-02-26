@@ -96,7 +96,7 @@ export default function CoreFeatures() {
   ]
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-white">
+    <section ref={sectionRef} className="py-24 px-6 bg-white/95 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-20">

@@ -10,7 +10,7 @@ import Footer from '@/components/sections/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white overflow-hidden">
+    <main className="min-h-screen overflow-hidden">
       <Navigation />
       <Hero />
       <ProblemSpace />

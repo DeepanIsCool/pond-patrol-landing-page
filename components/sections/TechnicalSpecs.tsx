@@ -105,7 +105,7 @@ export default function TechnicalSpecs() {
   ]
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-gradient-to-b from-[#F8F9FA] to-white">
+    <section ref={sectionRef} className="py-24 px-6 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-20">
