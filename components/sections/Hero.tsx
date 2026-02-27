@@ -1,12 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import dynamic from 'next/dynamic'
-
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
-  loading: () => <div className="w-full h-96 bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 rounded-3xl animate-pulse" />,
-  ssr: false,
-})
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -92,9 +86,16 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative w-full h-96 rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 shadow-2xl">
-              <Spline
-                scene="https://prod.spline.design/C0QPTjmFerkkKCjA/scene.splinecode"
+            <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <iframe
+                src="https://my.spline.design/C0QPTjmFerkkKCjA/scene"
+                frameBorder="0"
+                width="100%"
+                height="100%"
+                className="w-full h-full"
+                title="Pond Patrol 3D Model"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; magnetometer; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
               />
             </div>
           </div>
