@@ -45,7 +45,7 @@ export default function ProblemSpace() {
       id: 2,
       title: 'Labor-Intensive Control',
       description: 'Manual deterrence requires 24/7 monitoring and constant vigilance',
-      impact: '$50k+ annual labor costs',
+      impact: '₹50k+ annual labor costs',
     },
     {
       id: 3,
@@ -58,14 +58,17 @@ export default function ProblemSpace() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-6 bg-gradient-to-b from-[#0A2342] to-[#0A2342]/95 overflow-hidden"
+      className="relative py-24 px-6 overflow-hidden"
     >
+      {/* Semi-opaque overlay for readability */}
+      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+
       {/* Decorative background grid */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0A2342" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="1200" height="600" fill="url(#grid)" />
@@ -76,17 +79,16 @@ export default function ProblemSpace() {
         {/* Header */}
         <div className="text-center mb-20">
           <div
-            className={`transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             <h2 className="text-lg font-semibold text-[#D4AF37] mb-4 tracking-widest uppercase">
               The Real Cost
             </h2>
-            <h3 className="text-5xl lg:text-6xl font-bold text-white text-balance leading-tight mb-6">
+            <h3 className="font-unbounded text-5xl lg:text-6xl font-bold text-[#0A2342] text-balance leading-tight mb-6">
               Bird predation costs fish farms millions annually.
             </h3>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Traditional deterrence methods are labor-intensive, unreliable, and environmentally inconsistent. Pond Patrol changes everything.
             </p>
           </div>
@@ -97,15 +99,14 @@ export default function ProblemSpace() {
           {problems.map((problem, index) => (
             <div
               key={problem.id}
-              className={`group relative p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#D4AF37]/30 hover:bg-white/10 transition-all duration-500 transform ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`group relative p-8 rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 shadow-lg hover:border-[#D4AF37]/50 hover:shadow-xl transition-all duration-500 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#D4AF37]/0 to-[#C8102E]/0 rounded-2xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-300"></div>
               <div className="relative">
-                <h4 className="text-xl font-bold text-white mb-3">{problem.title}</h4>
-                <p className="text-gray-300 mb-6">{problem.description}</p>
+                <h4 className="font-unbounded text-xl font-bold text-[#0A2342] mb-3">{problem.title}</h4>
+                <p className="text-gray-700 mb-6">{problem.description}</p>
                 <div className="inline-block px-4 py-2 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50">
                   <p className="text-sm font-semibold text-[#D4AF37]">{problem.impact}</p>
                 </div>
@@ -117,15 +118,14 @@ export default function ProblemSpace() {
         {/* Quote Section */}
         <div className="text-center">
           <blockquote
-            className={`transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
+            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
             style={{ transitionDelay: '300ms' }}
           >
             <p className="text-3xl lg:text-4xl font-bold text-[#D4AF37] italic mb-4 text-balance">
               "In aquaculture, 24/7 protection isn't luxury. It's survival."
             </p>
-            <p className="text-lg text-gray-400">— Industry Leading Fish Farm Operator</p>
+            <p className="font-unbounded text-lg text-gray-600">— Industry Leading Fish Farm Operator</p>
           </blockquote>
         </div>
       </div>

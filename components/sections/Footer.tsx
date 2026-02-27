@@ -69,11 +69,10 @@ export default function Footer() {
           {/* CTA Section */}
           <div className="text-center mb-20">
             <div
-              className={`transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
             >
-              <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 text-balance leading-tight">
+              <h2 className="font-unbounded text-5xl lg:text-6xl font-bold text-white mb-6 text-balance leading-tight">
                 No Sleep. No Breaks.
                 <br />
                 <span className="text-[#D4AF37]">No Bird Attacks.</span>
@@ -96,14 +95,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16 py-12 border-t border-b border-white/10">
             {/* Newsletter Column */}
             <div
-              className={`lg:col-span-2 transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`lg:col-span-2 transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: '100ms' }}
             >
               <div className="flex items-center gap-2 mb-6">
                 <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_bv2xn6bv2xn6bv2x.png-LJVYX17lFZ7PyNlmO8XdZ1YaiRpD7v.jpeg"
+                  src="/pond_patrol_logo.png"
                   alt="Pond Patrol Logo"
                   className="h-8 w-auto"
                 />
@@ -129,9 +127,8 @@ export default function Footer() {
             {linkColumns.map((column, colIndex) => (
               <div
                 key={colIndex}
-                className={`transform transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
+                className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                  }`}
                 style={{ transitionDelay: `${(colIndex + 2) * 100}ms` }}
               >
                 <h4 className="font-bold text-white mb-6">{column.title}</h4>

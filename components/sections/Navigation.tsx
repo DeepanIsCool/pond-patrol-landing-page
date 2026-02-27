@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -16,17 +16,16 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? 'bg-white/80 backdrop-blur-md border-b border-gray-200/50'
           : 'bg-white/60 backdrop-blur-sm'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_bv2xn6bv2xn6bv2x.png-LJVYX17lFZ7PyNlmO8XdZ1YaiRpD7v.jpeg"
+            src="/pond_patrol_logo.png"
             alt="Pond Patrol Logo"
             className="h-10 w-auto"
           />

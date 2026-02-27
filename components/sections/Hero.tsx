@@ -1,5 +1,6 @@
 'use client'
 
+import Spline from '@splinetool/react-spline'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Hero() {
@@ -35,9 +36,8 @@ export default function Hero() {
           <div className="space-y-6">
             {/* Eyebrow */}
             <div
-              className={`text-[#D4AF37] text-xs font-bold tracking-widest uppercase transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`text-[#D4AF37] text-xs font-bold tracking-widest uppercase transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: '0ms' }}
             >
               Intelligent Aquaculture Protection
@@ -45,9 +45,8 @@ export default function Hero() {
 
             {/* H1 Headline */}
             <h1
-              className={`text-5xl lg:text-6xl font-bold text-[#0A2342] leading-tight text-balance transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`font-unbounded text-5xl lg:text-6xl font-bold text-[#0A2342] leading-tight text-balance transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: '100ms' }}
             >
               Stop Birds Before They Land, Not After They Feed
@@ -55,9 +54,8 @@ export default function Hero() {
 
             {/* Subheadline */}
             <p
-              className={`text-lg text-gray-700 leading-relaxed max-w-md transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`text-lg text-gray-700 leading-relaxed max-w-md transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: '200ms' }}
             >
               24/7 autonomous AI bird deterrence that prevents predation before it happens. Protect your biomass, maximize your profits, eliminate labor dependency.
@@ -65,9 +63,8 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-4 pt-4 transform transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
+              className={`flex flex-col sm:flex-row gap-4 pt-4 transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
               style={{ transitionDelay: '300ms' }}
             >
               <button className="px-8 py-3.5 rounded-full bg-[#D4AF37] text-[#0A2342] font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
@@ -81,21 +78,13 @@ export default function Hero() {
 
           {/* Right: Spline 3D Viewer */}
           <div
-            className={`relative h-full min-h-96 flex items-center justify-center transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
+            className={`relative h-full min-h-96 flex items-center justify-center transform transition-all duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
-              <iframe
-                src="https://my.spline.design/C0QPTjmFerkkKCjA/scene"
-                frameBorder="0"
-                width="100%"
-                height="100%"
-                className="w-full h-full"
-                title="Pond Patrol 3D Model"
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; magnetometer; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+            <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
+              <Spline
+                scene="https://prod.spline.design/C0QPTjmFerkkKCjA/scene.splinecode"
               />
             </div>
           </div>

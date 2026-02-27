@@ -22,7 +22,7 @@ export default function ContactForm() {
     farmSize: '',
     message: '',
   })
-  
+
   const [errors, setErrors] = useState<Errors>({})
   const [submitted, setSubmitted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -86,11 +86,11 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     if (validateForm()) {
       console.log('Form submitted:', formData)
       setSubmitted(true)
-      
+
       setTimeout(() => {
         setFormData({
           name: '',
@@ -105,15 +105,17 @@ export default function ContactForm() {
   }
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-white/95 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
+      {/* Semi-opaque overlay for readability */}
+      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div
-          className={`mb-16 text-center transform transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`mb-16 text-center transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0A2342] mb-4 text-balance">
+          <h2 className="font-unbounded text-4xl md:text-5xl font-bold text-[#0A2342] mb-4 text-balance">
             Ready to Protect Your Profits?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -124,12 +126,11 @@ export default function ContactForm() {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Information */}
           <div
-            className={`transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-            }`}
+            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}
           >
-            <div className="bg-gradient-to-br from-[#0A2342] to-[#0A2342]/90 rounded-2xl p-8 text-white h-full">
-              <h3 className="text-2xl font-bold mb-8">Get in Touch</h3>
+            <div className="bg-gradient-to-br from-[#0A2342] to-[#0A2342]/90 rounded-2xl p-8 text-white h-full shadow-2xl">
+              <h3 className="font-unbounded text-2xl font-bold mb-8">Get in Touch</h3>
 
               <div className="space-y-8">
                 <div className="flex gap-4">
@@ -176,12 +177,11 @@ export default function ContactForm() {
 
           {/* Contact Form */}
           <div
-            className={`transform transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-            }`}
+            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}
           >
             {submitted ? (
-              <div className="bg-green-50 border-2 border-green-500 rounded-2xl p-8 text-center">
+              <div className="bg-green-50 border-2 border-green-500 rounded-2xl p-8 text-center shadow-lg">
                 <div className="text-5xl mb-4">✓</div>
                 <h3 className="text-2xl font-bold text-green-800 mb-2">Thank You!</h3>
                 <p className="text-green-700">
@@ -189,7 +189,7 @@ export default function ContactForm() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 bg-white/90 backdrop-blur-md rounded-2xl p-8 border border-gray-200 shadow-lg">
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-[#0A2342] mb-2">
@@ -202,11 +202,10 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                      errors.name
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.name
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                    }`}
+                      }`}
                   />
                   {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
                 </div>
@@ -223,11 +222,10 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                      errors.email
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.email
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                    }`}
+                      }`}
                   />
                   {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
                 </div>
@@ -244,11 +242,10 @@ export default function ContactForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="98765 43210"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                      errors.phone
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.phone
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                    }`}
+                      }`}
                   />
                   {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
                 </div>
@@ -263,11 +260,10 @@ export default function ContactForm() {
                     name="farmSize"
                     value={formData.farmSize}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                      errors.farmSize
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.farmSize
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                    }`}
+                      }`}
                   >
                     <option value="">Select your farm size</option>
                     <option value="1-5">1-5 acres</option>
@@ -291,11 +287,10 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Tell us about your farm and any questions..."
                     rows={4}
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors resize-none ${
-                      errors.message
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors resize-none ${errors.message
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                    }`}
+                      }`}
                   />
                   {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
                 </div>
