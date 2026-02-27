@@ -1,6 +1,7 @@
 'use client'
 
 import Spline from '@splinetool/react-spline'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Hero() {
@@ -82,11 +83,12 @@ export default function Hero() {
               }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
-              <Spline
-                scene="https://prod.spline.design/C0QPTjmFerkkKCjA/scene.splinecode"
-              />
-            </div>
+            <Image
+              src="/pond_patrol_boat_image.png"
+              alt="Hero"
+              width={1000}
+              height={1000}
+            />
           </div>
         </div>
       </div>

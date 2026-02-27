@@ -1,13 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
-interface ProblemCard {
-  id: number
-  title: string
-  description: string
-  impact: string
-}
+import Image from 'next/image'
 
 export default function ProblemSpace() {
   const [isVisible, setIsVisible] = useState(false)
@@ -20,7 +14,7 @@ export default function ProblemSpace() {
           setIsVisible(true)
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     )
 
     if (sectionRef.current) {
@@ -34,99 +28,76 @@ export default function ProblemSpace() {
     }
   }, [])
 
-  const problems: ProblemCard[] = [
+  const problems = [
     {
       id: 1,
-      title: 'Bird Predation Losses',
-      description: 'Cormorants, herons, and egrets consume up to 2kg of fish per bird daily',
-      impact: '15-30% annual yield loss',
+      impact: '15-30%',
+      title: 'Annual Yield Loss',
+      description: 'Stolen directly from ponds by cormorants, herons, and egrets daily.',
     },
     {
       id: 2,
-      title: 'Labor-Intensive Control',
-      description: 'Manual deterrence requires 24/7 monitoring and constant vigilance',
-      impact: '₹50k+ annual labor costs',
-    },
-    {
-      id: 3,
-      title: 'Environmental Inconsistency',
-      description: 'Weather variations and bird adaptation reduce traditional method effectiveness',
-      impact: 'Unpredictable protection levels',
+      impact: '₹50k+',
+      title: 'Labor Costs',
+      description: 'Wasted annually on manual, unpredictable, and ineffective deterrence methods.',
     },
   ]
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 px-6 overflow-hidden"
-    >
-      {/* Semi-opaque overlay for readability */}
-      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
-
-      {/* Decorative background grid */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0A2342" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="1200" height="600" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="text-center mb-20">
+    <section ref={sectionRef} className="py-24 px-6 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left: Image Collage */}
           <div
-            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            className={`relative rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
           >
-            <h2 className="text-lg font-semibold text-[#D4AF37] mb-4 tracking-widest uppercase">
-              The Real Cost
-            </h2>
-            <h3 className="font-unbounded text-5xl lg:text-6xl font-bold text-[#0A2342] text-balance leading-tight mb-6">
-              Bird predation costs fish farms millions annually.
-            </h3>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Traditional deterrence methods are labor-intensive, unreliable, and environmentally inconsistent. Pond Patrol changes everything.
-            </p>
-          </div>
-        </div>
-
-        {/* Problem Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {problems.map((problem, index) => (
-            <div
-              key={problem.id}
-              className={`group relative p-8 rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 shadow-lg hover:border-[#D4AF37]/50 hover:shadow-xl transition-all duration-500 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#D4AF37]/0 to-[#C8102E]/0 rounded-2xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-300"></div>
-              <div className="relative">
-                <h4 className="font-unbounded text-xl font-bold text-[#0A2342] mb-3">{problem.title}</h4>
-                <p className="text-gray-700 mb-6">{problem.description}</p>
-                <div className="inline-block px-4 py-2 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50">
-                  <p className="text-sm font-semibold text-[#D4AF37]">{problem.impact}</p>
-                </div>
-              </div>
+            <Image
+              src="/birds_eating_fish.png"
+              alt="Birds feeding on farm fish"
+              width={800}
+              height={800}
+              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A2342]/80 to-transparent flex items-end p-8">
+              <p className="text-white font-semibold text-xl tracking-wide">The Silent Threat to Your Aquaculture</p>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Quote Section */}
-        <div className="text-center">
-          <blockquote
-            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <p className="text-3xl lg:text-4xl font-bold text-[#D4AF37] italic mb-4 text-balance">
-              "In aquaculture, 24/7 protection isn't luxury. It's survival."
-            </p>
-            <p className="font-unbounded text-lg text-gray-600">— Industry Leading Fish Farm Operator</p>
-          </blockquote>
+          {/* Right: Content */}
+          <div className="space-y-8">
+            <div className={`space-y-4 transform transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+              }`}>
+              <h2 className="text-[#D4AF37] font-bold tracking-widest uppercase text-sm">The Real Cost</h2>
+              <h3 className="font-unbounded text-4xl lg:text-5xl font-bold text-[#0A2342] leading-tight">
+                Predatory Birds Are Devouring Your Profits
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Traditional deterrence methods are labor-intensive, unreliable, and environmentally inconsistent. Every day without protection is money lost directly to the sky.
+              </p>
+            </div>
+
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 transform transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}>
+              {problems.map((problem) => (
+                <div key={problem.id} className="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#D4AF37]/50 hover:shadow-md transition-all group">
+                  <div className="text-3xl font-bold text-[#C8102E] mb-2 group-hover:scale-110 transform transition-transform origin-left">{problem.impact}</div>
+                  <div className="font-semibold text-[#0A2342] mb-1">{problem.title}</div>
+                  <p className="text-sm text-gray-600">{problem.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <blockquote
+              className={`pt-6 border-t border-gray-100 transform transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+            >
+              <p className="text-xl font-bold text-[#D4AF37] italic mb-2">
+                "In aquaculture, 24/7 protection isn't luxury. It's survival."
+              </p>
+              <p className="text-sm text-gray-600 font-medium tracking-wide uppercase">— Industry Leading Fish Farm Operator</p>
+            </blockquote>
+          </div>
         </div>
       </div>
     </section>
