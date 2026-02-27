@@ -1,7 +1,7 @@
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono, Unbounded } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import { Analytics } from '@vercel/analytics/next';
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono, Unbounded } from 'next/font/google';
+import './globals.css';
 
 const geist = Geist({
   subsets: ["latin"],
@@ -31,23 +31,10 @@ export const metadata: Metadata = {
   description: 'Intelligent aquaculture protection with autonomous AI-powered bird deterrence. Secure your yield 24/7.',
   keywords: ['fish farming', 'bird deterrence', 'aquaculture', 'AI technology', 'predation prevention'],
   authors: [{ name: 'Brave Ventures' }],
-  generator: 'v0.app',
+  generator: 'Pond Patrol',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/pond_patrol_logo.png',
+    apple: '/pond_patrol_logo.png',
   },
 }
 

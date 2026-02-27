@@ -201,47 +201,18 @@ export default function CoreFeatures() {
         </div>
 
         {/* How It Works Section */}
-        <div className="bg-gradient-to-r from-[#0A2342] to-[#0A2342]/95 rounded-3xl p-16 overflow-hidden shadow-2xl">
+        <div className="bg-white rounded-3xl p-16 overflow-hidden shadow-2xl border border-gray-200">
           <div className="relative z-10">
-            <h3 className="font-unbounded text-4xl font-bold text-white text-center mb-4 text-balance">
+            <h3 className="font-unbounded text-4xl font-bold text-[#0A2342] text-center mb-4 text-balance">
               How Pond Patrol Works
             </h3>
-            <p className="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
+            <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
               A three-stage process that monitors, predicts, and responds in
               real-time to bird threats.
             </p>
 
-            {/* Steps Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {steps.map((step, index) => (
-                <div
-                  key={index}
-                  className={`relative transform transition-all duration-700 ${isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                    }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center justify-center h-14 w-14 rounded-full bg-[#D4AF37] text-[#0A2342] font-bold text-xl">
-                        {step.number}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-unbounded text-xl font-bold text-white mb-2">
-                        {step.title}
-                      </h4>
-                      <p className="text-gray-300">{step.description}</p>
-                    </div>
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute -right-4 top-6 text-[#D4AF37]/30 text-2xl">
-                      →
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className={`flex justify-center transform transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+              <img src="/how_pond_patrol_works.png" alt="How Pond Patrol Works" className="w-full max-w-5xl h-auto object-contain drop-shadow-xl rounded-2xl" />
             </div>
           </div>
         </div>

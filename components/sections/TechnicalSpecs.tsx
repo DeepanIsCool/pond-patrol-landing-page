@@ -203,7 +203,7 @@ export default function TechnicalSpecs() {
         </div>
 
         {/* Pricing Section */}
-        <div>
+        {/* <div>
           <h3 className="font-unbounded text-3xl font-bold text-[#0A2342] text-center mb-4">
             Flexible Pricing Plans
           </h3>
@@ -283,7 +283,7 @@ export default function TechnicalSpecs() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

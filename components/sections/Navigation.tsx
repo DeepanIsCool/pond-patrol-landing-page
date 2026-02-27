@@ -17,8 +17,8 @@ export default function Navigation() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? 'bg-white/80 backdrop-blur-md border-b border-gray-200/50'
-          : 'bg-white/60 backdrop-blur-sm'
+        ? 'bg-white/80 backdrop-blur-md border-b border-gray-200/50'
+        : 'bg-white/60 backdrop-blur-sm'
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -27,7 +27,7 @@ export default function Navigation() {
           <img
             src="/pond_patrol_logo.png"
             alt="Pond Patrol Logo"
-            className="h-10 w-auto"
+            className="h-20 w-auto"
           />
         </div>
 
