@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 
-const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
   loading: () => <div className="w-full h-96 bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 rounded-3xl animate-pulse" />,
   ssr: false,
 })
