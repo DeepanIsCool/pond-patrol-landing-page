@@ -138,6 +138,24 @@ export default function CoreFeatures() {
           ))}
         </div>
 
+        {/* Technical Specification Image */}
+        <div className="mb-20 rounded-3xl overflow-hidden bg-gradient-to-b from-gray-50 to-white p-8 border border-gray-200">
+          <div
+            className={`transform transition-all duration-700 ${
+              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+          >
+            <img
+              src="/tech-sketch.jpg"
+              alt="Pond Patrol Technical Catamaran Design"
+              className="w-full h-auto max-h-96 object-contain"
+            />
+            <p className="text-center mt-6 text-gray-600 font-semibold">
+              Dual-hull autonomous catamaran design with advanced sensor arrays and deterrence systems
+            </p>
+          </div>
+        </div>
+
         {/* How It Works Section */}
         <div className="bg-gradient-to-r from-[#0A2342] to-[#0A2342]/95 rounded-3xl p-16 overflow-hidden">
           <div className="relative z-10">

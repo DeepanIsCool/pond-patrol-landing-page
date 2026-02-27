@@ -50,7 +50,7 @@ export default function Hero() {
               }`}
               style={{ transitionDelay: '100ms' }}
             >
-              Built for Modern Fish Farming.
+              Stop Birds Before They Land, Not After They Feed
             </h1>
 
             {/* Subheadline */}
@@ -60,7 +60,7 @@ export default function Hero() {
               }`}
               style={{ transitionDelay: '200ms' }}
             >
-              Autonomous, AI-powered bird deterrence designed to secure your yield.
+              24/7 autonomous AI bird deterrence that prevents predation before it happens. Protect your biomass, maximize your profits, eliminate labor dependency.
             </p>
 
             {/* CTA Buttons */}

@@ -60,7 +60,7 @@ export default function TechnicalSpecs() {
   const pricingTiers: PricingTier[] = [
     {
       name: 'Starter',
-      price: '$24,999',
+      price: '₹20,00,000',
       description: 'Perfect for small to medium farms up to 50 hectares.',
       features: [
         '1x Pond Patrol Unit',
@@ -73,7 +73,7 @@ export default function TechnicalSpecs() {
     },
     {
       name: 'Professional',
-      price: '$54,999',
+      price: '₹45,00,000',
       description: 'Ideal for large-scale aquaculture operations 50-200 hectares.',
       features: [
         '2x Pond Patrol Units',

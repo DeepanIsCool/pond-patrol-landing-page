@@ -6,6 +6,7 @@ import Hero from '@/components/sections/Hero'
 import ProblemSpace from '@/components/sections/ProblemSpace'
 import CoreFeatures from '@/components/sections/CoreFeatures'
 import TechnicalSpecs from '@/components/sections/TechnicalSpecs'
+import ContactForm from '@/components/sections/ContactForm'
 import Footer from '@/components/sections/Footer'
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <ProblemSpace />
       <CoreFeatures />
       <TechnicalSpecs />
+      <ContactForm />
       <Footer />
     </main>
   )
