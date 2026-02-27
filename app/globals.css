@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Pond Patrol Brand Colors */
 :root {
   --color-pond-blue: #0A2342;
   --color-pond-gold: #D4AF37;
@@ -139,7 +138,6 @@
   }
 }
 
-/* Custom Animations for Pond Patrol */
 @layer utilities {
   @keyframes float {
     0%, 100% {
@@ -212,7 +210,6 @@
     animation: countUp 1s ease-out forwards;
   }
 
-  /* Background overlay utilities */
   .bg-overlay-light {
     background-color: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(4px);
@@ -223,7 +220,6 @@
     backdrop-filter: blur(2px);
   }
 
-  /* Responsive background adjustments */
   @media (max-width: 768px) {
     html {
       background-attachment: scroll;
