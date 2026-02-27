@@ -1,13 +1,10 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
-import Navigation from '@/components/sections/Navigation'
-import Hero from '@/components/sections/Hero'
-import ProblemSpace from '@/components/sections/ProblemSpace'
-import CoreFeatures from '@/components/sections/CoreFeatures'
-import TechnicalSpecs from '@/components/sections/TechnicalSpecs'
 import ContactForm from '@/components/sections/ContactForm'
+import CoreFeatures from '@/components/sections/CoreFeatures'
 import Footer from '@/components/sections/Footer'
+import Hero from '@/components/sections/Hero'
+import Navigation from '@/components/sections/Navigation'
+import ProblemSpace from '@/components/sections/ProblemSpace'
+import TechnicalSpecs from '@/components/sections/TechnicalSpecs'
 
 export default function Home() {
   return (

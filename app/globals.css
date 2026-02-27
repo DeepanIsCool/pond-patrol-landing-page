@@ -132,14 +132,32 @@
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
+    scroll-behavior: smooth;
   }
   body {
     @apply text-foreground;
     background-color: transparent;
   }
+
+  /* Anchor scroll offset for fixed nav */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  /* Global focus-visible ring using brand gold */
+  :focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 2px;
+  }
+
+  /* Tabular nums utility for numeric alignment */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 @layer utilities {
+  /* ── Existing keyframes ── */
   @keyframes float {
     0%, 100% {
       transform: translateY(0px);
@@ -191,6 +209,57 @@
     }
   }
 
+  /* ── Premium micro-animation keyframes ── */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.85;
+      transform: scale(1.03);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes goldGlow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+    50% {
+      box-shadow: 0 0 20px 4px rgba(212, 175, 55, 0.15);
+    }
+  }
+
+  /* ── Animation classes ── */
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
@@ -211,6 +280,34 @@
     animation: countUp 1s ease-out forwards;
   }
 
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.15) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-subtle-pulse {
+    animation: subtlePulse 2s ease-in-out infinite;
+  }
+
+  .animate-gold-glow {
+    animation: goldGlow 2.5s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  /* ── Background overlays ── */
   .bg-overlay-light {
     background-color: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(4px);
@@ -221,9 +318,22 @@
     backdrop-filter: blur(2px);
   }
 
+  /* ── Mobile background fix ── */
   @media (max-width: 768px) {
     html {
       background-attachment: scroll;
+    }
+  }
+
+  /* ── Reduced motion: respect user preferences ── */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }

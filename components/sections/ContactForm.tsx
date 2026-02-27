@@ -25,8 +25,10 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<Errors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const firstErrorRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,14 +40,10 @@ export default function ContactForm() {
       { threshold: 0.2 }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    const el = sectionRef.current
+    if (el) observer.observe(el)
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
+      if (el) observer.unobserve(el)
     }
   }, [])
 
@@ -56,14 +54,14 @@ export default function ContactForm() {
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email'
+      newErrors.email = 'Please enter a valid email address'
     }
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required'
     } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
       newErrors.phone = 'Please enter a valid 10-digit phone number'
     }
-    if (!formData.farmSize.trim()) newErrors.farmSize = 'Farm size is required'
+    if (!formData.farmSize.trim()) newErrors.farmSize = 'Please select your farm size'
     if (!formData.message.trim()) newErrors.message = 'Message is required'
 
     setErrors(newErrors)
@@ -88,88 +86,105 @@ export default function ContactForm() {
     e.preventDefault()
 
     if (validateForm()) {
-      console.log('Form submitted:', formData)
-      setSubmitted(true)
-
+      setIsSubmitting(true)
+      // Simulate submission
       setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          farmSize: '',
-          message: '',
-        })
-        setSubmitted(false)
-      }, 5000)
+        setIsSubmitting(false)
+        setSubmitted(true)
+
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            farmSize: '',
+            message: '',
+          })
+          setSubmitted(false)
+        }, 5000)
+      }, 1200)
     }
   }
 
+  const inputBaseClass = "w-full px-4 py-3.5 rounded-xl border-2 transition-[border-color,box-shadow] duration-200 bg-white focus-visible:border-[#D4AF37] focus-visible:ring-2 focus-visible:ring-[#D4AF37]/20 focus:outline-none"
+  const inputErrorClass = "border-red-400 bg-red-50/50"
+  const inputNormalClass = "border-gray-200"
+
   return (
-    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="py-28 px-6 relative overflow-hidden">
       {/* Semi-opaque overlay for readability */}
-      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div
-          className={`mb-16 text-center transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          className={`mb-16 text-center transform transition-[opacity,transform] duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
         >
           <h2 className="font-unbounded text-4xl md:text-5xl font-bold text-[#0A2342] mb-4 text-balance">
             Ready to Protect Your Profits?
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Schedule your free consultation and see how Pond Patrol can revolutionize your fish farming operation
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-pretty">
+            Schedule your free consultation and see how Pond Patrol can revolutionize your fish farming operation.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Information */}
           <div
-            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            className={`transform transition-[opacity,transform] duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`}
           >
-            <div className="bg-gradient-to-br from-[#0A2342] to-[#0A2342]/90 rounded-2xl p-8 text-white h-full shadow-2xl">
+            <div className="bg-gradient-to-br from-[#0A2342] to-[#0A2342]/90 rounded-2xl p-8 lg:p-10 text-white h-full shadow-2xl">
               <h3 className="font-unbounded text-2xl font-bold mb-8">Get in Touch</h3>
 
               <div className="space-y-8">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#D4AF37] text-xl">📞</span>
+                    <svg className="w-5 h-5 text-[#D4AF37]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                    </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Call Us</h4>
+                    <h4 className="font-semibold mb-1">Call Us</h4>
                     <p className="text-white/80">+91-XXXX-XXXX-XX</p>
-                    <p className="text-white/60 text-sm">Available 9 AM - 6 PM IST</p>
+                    <p className="text-white/50 text-sm">Available 9 AM – 6 PM IST</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#D4AF37] text-xl">✉️</span>
+                    <svg className="w-5 h-5 text-[#D4AF37]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Email</h4>
+                    <h4 className="font-semibold mb-1">Email</h4>
                     <p className="text-white/80">contact@pondpatrol.in</p>
-                    <p className="text-white/60 text-sm">Response within 24 hours</p>
+                    <p className="text-white/50 text-sm">Response within 24 hours</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#D4AF37] text-xl">🌍</span>
+                    <svg className="w-5 h-5 text-[#D4AF37]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="2" y1="12" x2="22" y2="12" />
+                      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                    </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Live Demo</h4>
+                    <h4 className="font-semibold mb-1">Live Demo</h4>
                     <p className="text-white/80">AquaEx Lucknow 2026</p>
-                    <p className="text-white/60 text-sm">See it in action</p>
+                    <p className="text-white/50 text-sm">See it in action</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-12 pt-8 border-t border-white/10">
                 <p className="text-[#D4AF37] font-semibold italic text-lg">
-                  "Stop Feeding Birds Your Profits"
+                  &ldquo;Stop Feeding Birds Your Profits&rdquo;
                 </p>
               </div>
             </div>
@@ -177,19 +192,27 @@ export default function ContactForm() {
 
           {/* Contact Form */}
           <div
-            className={`transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            className={`transform transition-[opacity,transform] duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`}
           >
             {submitted ? (
-              <div className="bg-green-50 border-2 border-green-500 rounded-2xl p-8 text-center shadow-lg">
-                <div className="text-5xl mb-4">✓</div>
+              <div className="bg-green-50 border-2 border-green-400 rounded-2xl p-8 text-center shadow-lg" role="status" aria-live="polite">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
                 <h3 className="text-2xl font-bold text-green-800 mb-2">Thank You!</h3>
                 <p className="text-green-700">
-                  Your message has been received. We'll contact you within 24 hours to schedule your free consultation.
+                  Your message has been received. We&rsquo;ll contact you within 24 hours to schedule your free consultation.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6 bg-white/90 backdrop-blur-md rounded-2xl p-8 border border-gray-200 shadow-lg">
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="space-y-5 bg-white/90 backdrop-blur-md rounded-2xl p-8 lg:p-10 border border-gray-200 shadow-lg"
+              >
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-[#0A2342] mb-2">
@@ -199,15 +222,13 @@ export default function ContactForm() {
                     type="text"
                     id="name"
                     name="name"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your full name"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.name
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                      }`}
+                    placeholder="Enter your full name…"
+                    className={`${inputBaseClass} ${errors.name ? inputErrorClass : inputNormalClass}`}
                   />
-                  {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-red-600 text-sm mt-1.5" role="alert">{errors.name}</p>}
                 </div>
 
                 {/* Email */}
@@ -219,35 +240,33 @@ export default function ContactForm() {
                     type="email"
                     id="email"
                     name="email"
+                    autoComplete="email"
+                    spellCheck={false}
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.email
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                      }`}
+                    className={`${inputBaseClass} ${errors.email ? inputErrorClass : inputNormalClass}`}
                   />
-                  {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                  {errors.email && <p className="text-red-600 text-sm mt-1.5" role="alert">{errors.email}</p>}
                 </div>
 
                 {/* Phone */}
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-[#0A2342] mb-2">
-                    Phone Number (10 digits)
+                    Phone Number
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="98765 43210"
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.phone
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                      }`}
+                    className={`${inputBaseClass} ${errors.phone ? inputErrorClass : inputNormalClass}`}
                   />
-                  {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-600 text-sm mt-1.5" role="alert">{errors.phone}</p>}
                 </div>
 
                 {/* Farm Size */}
@@ -260,19 +279,16 @@ export default function ContactForm() {
                     name="farmSize"
                     value={formData.farmSize}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${errors.farmSize
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                      }`}
+                    className={`${inputBaseClass} ${errors.farmSize ? inputErrorClass : inputNormalClass}`}
                   >
-                    <option value="">Select your farm size</option>
-                    <option value="1-5">1-5 acres</option>
-                    <option value="5-10">5-10 acres</option>
-                    <option value="10-25">10-25 acres</option>
-                    <option value="25-50">25-50 acres</option>
+                    <option value="">Select your farm size…</option>
+                    <option value="1-5">1–5 acres</option>
+                    <option value="5-10">5–10 acres</option>
+                    <option value="10-25">10–25 acres</option>
+                    <option value="25-50">25–50 acres</option>
                     <option value="50+">50+ acres</option>
                   </select>
-                  {errors.farmSize && <p className="text-red-600 text-sm mt-1">{errors.farmSize}</p>}
+                  {errors.farmSize && <p className="text-red-600 text-sm mt-1.5" role="alert">{errors.farmSize}</p>}
                 </div>
 
                 {/* Message */}
@@ -285,26 +301,34 @@ export default function ContactForm() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell us about your farm and any questions..."
+                    placeholder="Tell us about your farm and any questions…"
                     rows={4}
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors resize-none ${errors.message
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-gray-300 bg-white focus:border-[#D4AF37] focus:outline-none'
-                      }`}
+                    className={`${inputBaseClass} resize-none ${errors.message ? inputErrorClass : inputNormalClass}`}
                   />
-                  {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
+                  {errors.message && <p className="text-red-600 text-sm mt-1.5" role="alert">{errors.message}</p>}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#0A2342] to-[#0A2342]/80 text-white py-3 rounded-lg font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-[#0A2342] to-[#0A2342]/85 text-white py-3.5 rounded-xl font-bold text-lg hover:shadow-lg transform hover:scale-[1.02] transition-[box-shadow,transform] duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                 >
-                  Schedule Free Consultation
+                  {isSubmitting ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Sending…
+                    </>
+                  ) : (
+                    'Schedule Free Consultation'
+                  )}
                 </button>
 
-                <p className="text-center text-gray-600 text-sm">
-                  We'll contact you within 24 hours to confirm your consultation slot
+                <p className="text-center text-gray-500 text-sm">
+                  We&rsquo;ll contact you within 24 hours to confirm your consultation slot.
                 </p>
               </form>
             )}
