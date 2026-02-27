@@ -1,6 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
+  loading: () => <div className="w-full h-96 bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 rounded-3xl animate-pulse" />,
+  ssr: false,
+})
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -79,18 +85,16 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Hero Image */}
+          {/* Right: Spline 3D Viewer */}
           <div
             className={`relative h-full min-h-96 flex items-center justify-center transform transition-all duration-700 ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative w-full h-96 rounded-3xl overflow-hidden">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_aywscnaywscnayws.png-n7j7d2Qjqp3Xu4bDXIhzaSo3nXaite.jpeg"
-                alt="Pond Patrol Autonomous AI Bird Deterrence System"
-                className="w-full h-full object-cover"
+            <div className="relative w-full h-96 rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2342] to-[#0A2342]/80 shadow-2xl">
+              <Spline
+                scene="https://prod.spline.design/C0QPTjmFerkkKCjA/scene.splinecode"
               />
             </div>
           </div>
