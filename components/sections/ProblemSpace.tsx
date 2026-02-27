@@ -44,12 +44,13 @@ export default function ProblemSpace() {
   ]
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           {/* Left: Image Collage */}
           <div
-            className={`relative rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+            className={`lg:col-span-7 relative rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
           >
             <Image
@@ -65,7 +66,7 @@ export default function ProblemSpace() {
           </div>
 
           {/* Right: Content */}
-          <div className="space-y-8">
+          <div className="lg:col-span-5 space-y-8">
             <div className={`space-y-4 transform transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
               }`}>
               <h2 className="text-[#D4AF37] font-bold tracking-widest uppercase text-sm">The Real Cost</h2>

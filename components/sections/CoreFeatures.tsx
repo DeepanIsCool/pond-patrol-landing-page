@@ -132,8 +132,8 @@ export default function CoreFeatures() {
         <div className="text-center mb-20">
           <div
             className={`transform transition-all duration-700 ${isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-6"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
               }`}
           >
             <h2 className="text-lg font-semibold text-[#D4AF37] mb-4 tracking-widest uppercase">
@@ -157,8 +157,8 @@ export default function CoreFeatures() {
               onMouseEnter={() => setHoveredCard(feature.id)}
               onMouseLeave={() => setHoveredCard(null)}
               className={`group relative p-10 rounded-2xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-lg hover:border-[#D4AF37]/50 transition-all duration-500 transform ${isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
                 } ${hoveredCard === feature.id ? "scale-105 shadow-2xl" : ""}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -181,11 +181,18 @@ export default function CoreFeatures() {
             className={`transform transition-all duration-700 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
           >
-            <img
-              src="/product_outline.png"
-              alt="Pond Patrol Technical Catamaran Design"
-              className="w-full h-auto max-h-96 object-contain"
-            />
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+              <img
+                src="/product_outline.png"
+                alt="Pond Patrol Technical Catamaran Design"
+                className="w-full md:w-1/2 h-auto object-contain"
+              />
+              <img
+                src="/pond_patrol_boat_top_view.png"
+                alt="Pond Patrol Top View"
+                className="w-full md:w-1/2 h-auto object-contain"
+              />
+            </div>
             <p className="text-center mt-6 text-gray-600 font-semibold">
               Dual-hull autonomous catamaran design with advanced sensor arrays
               and deterrence systems
@@ -210,8 +217,8 @@ export default function CoreFeatures() {
                 <div
                   key={index}
                   className={`relative transform transition-all duration-700 ${isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-6"
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
                     }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >

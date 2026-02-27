@@ -86,8 +86,9 @@ export default function Hero() {
             <Image
               src="/pond_patrol_boat_image.png"
               alt="Hero"
-              width={1000}
-              height={1000}
+              width={1600}
+              height={1600}
+              className="w-full h-auto scale-[1.4]"
             />
           </div>
         </div>
